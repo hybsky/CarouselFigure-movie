@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>movie</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		img{
+			border:0;
+		}
+		body{
+			font:12px/130% verdana,geneva,arial,helvetica,sans-serif,宋体;
+			}
+		li{
+			list-style:none;
+		}
+		.clearfix:after{
+			content:"&nbsp;";
+			display:block;
+			height:0;
+			clear:both;
+			visibility:hidden;
+			}
+		.clearfix{
+			*display:inline-block;
+		}
+		.br{ 
+			word-break: break-all; 
+			word-wrap: break-word;
+		}
+		a:link{ 
+			color:#000; 
+			text-decoration:none; 
+		}
+		a:visited{ 
+			color:#000; 
+			text-decoration:none; 
+		}
+		a:hover{ 
+			color:#000; 
+			text-decoration:underline; 
+		}
+		.picshow{ 
+			width: 450px; 
+			padding: 10px; 
+			margin: 20px; 
+			border: 1px solid #eee; 
+			position: relative; 
+			background: #f5f5f5;
+		}
+		.picshow h2{ 
+			font-size: 14px; 
+			padding: 3px; 
+		}
+		.picshow h3{ 
+			font-size: 12px;
+			padding: 3px; 
+		}
+		.picshow dl{ 
+			margin: 5px 0; 
+		}
+		.picshow dl dt { 
+			position: relative; 
+			width: 364px;
+			height: 186px;
+			overflow: hidden;
+		}
+		.picshow dl dt div{ 
+			width: 364px;
+		}
+		.picshow dl dt div a{ 
+			display: block;
+			width: 364px;
+			height: 186px; 
+			overflow: hidden;
+		}
+		.picshow dl dt div a img{ 
+			display: block;
+		}
+		#pictype{
+			position:  absolute; 
+			top: 0; 
+			left: 0; 
+			z-index: 0;
+		}
+		#other{
+			position:  absolute;
+			top: 0; 
+			left: 0; 
+			z-index: 1;
+		}
+		#other img{
+			width: 356px;
+			height: 178px; 
+			margin: 3px; 
+			border: 1px solid #333;
+		}
+		.picshow dl dd{ 
+			height: 46px; 
+			overflow: hidden; 
+		}
+		.picshow dl dd div{
+		 }
+		.picshow dl dd{ 
+			margin-top: 10px; 
+			line-height: 20px;
+		}
+		.picshow dl dd a:link,.picshow dl dd a:visited{ 
+			color: green; 
+			text-decoration: underline; 
+		}
+		.picshow dl dd a:hover{ 
+			color: maroon; 
+		}
+		.picsel{
+			width: 80px; 
+			height: 177px; 
+			padding-top:9px; 
+			overflow: hidden; 
+			position: absolute; 
+			right: 9px; 
+			top: 37px; 
+			background: url(http://home.blueidea.com/attachment/200908/11/285026_1249973332Fu66.png) no-repeat; 
+		}
+		.picsel span{ 
+			display: block;
+			width: 78px; 
+			height: 8px; 
+			overflow: hidden;
+		}
+		.picsel a{ 
+			display: block; 
+			height: 42px;
+			text-align: center; 
+			overflow: hidden;
+		}
+		.picsel a img{ 
+			margin-top: 1px;
+		}
+		.selbg{ 
+			background: #4682b4;
+		}
+		.pre{ 
+			background:#edf6ff url(http://home.blueidea.com/attachment/200908/11/285026_1249973331sHt6.gif) no-repeat;
+			 position: absolute;
+			 z-index: 1; 
+			top: 0; 
+			left: 1px;
+			border-top: 1px solid #d6e5f5; 
+		}
+		.pre2{
+			background:#edf6ff url(http://home.blueidea.com/attachment/200908/11/285026_1249973331sHt6.gif) 0 -18px no-repeat;
+			position: absolute;
+			z-index: 1; 
+			top: 0;
+			left: 1px;
+			border-top: 1px solid #d6e5f5; 
+			cursor: pointer; 
+		}
+		.next{ 
+			background:#edf6ff url(http://home.blueidea.com/attachment/200908/11/285026_1249973331sHt6.gif) 0 -9px no-repeat;  
+			position: absolute; 
+			z-index: 1; 
+			bottom: 0; 
+			left: 1px;
+			border-bottom: 1px solid #d6e5f5; 
+			cursor: pointer; 
+		}
+		.next2{ 
+			background:#edf6ff url(http://home.blueidea.com/attachment/200908/11/285026_1249973331sHt6.gif) 0 -27px no-repeat; 
+			position: absolute; 
+			z-index: 1;
+			bottom: 0; 
+			left: 1px;
+			border-bottom: 1px solid #d6e5f5;
+		}
+		.seltype{ 
+			position: relative; 
+			z-index: 0; 
+			width: 78px;
+			float: left; 
+			margin: 0 1px 0 1px;
+		}
+	</style>
+</head>
+<body>
+	<div class="picshow">
+		<h2>今日看点</h2>
+		<div class="picsel">
+			<span id="pre" class="pre"></span>
+			<span id="next" class="next2"></span>
+			<div id="picsel" class="seltype">
+				<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/1bea477d1e3d2ff44d01121a989c02c5.jpg" /></a>
+				<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/8dc8f0a4857b66af1f10cf01cbf9e713.jpg" /></a>
+				<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/f993f1f47dfa8f2b2f553fd5d43a184e.jpg" /></a>
+				<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/a71b4f698b329986d9bdaea8e1697197.jpg" /></a>
+				<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/77e7ec3a6fc65aa327948c56c0b97189.jpg" /></a>
+				<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/39425881e32cbb61ded0e80ba2ab4463.jpg" /></a>
+			</div>
+		</div>
+		<dl>
+			<dt>
+				<div id="pictype">
+					<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/d594540ef8c9899804e909ce47860065.jpg" /></a>
+					<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/07373cc25309850d32728dcb6a536e3f.jpg" /></a>
+					<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/681cad85b4ad73cf215eafe721a93ecd.jpg" /></a>
+					<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/c699bd9b6567f55e29088615b61e1b89.jpg" /></a>
+					<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/15fb84e7634425c050fbb9096520c869.jpg" /></a>
+					<a href=""><img alt="" src="http://images.movie.xunlei.com/gallery/553/cb865b4c3c82c496118e7a1d3c284525.jpg" /></a>
+				</div>
+				<div id="other"></div>
+			</dt>
+			<dd>
+				<div id="txttype">
+					<h3><a href="">【A佳片点播】《GOTH断掌事件》根据日本著名小说家乙一同名作品改编</a></h3>影片以精美而别致的色调 展现出了暗黑世界背面青春期少年少女纤细的内心...
+					<h3><a href="">【B荧屏热播】《珠光宝气》TVB年度大戏、黎姿收山之作</a></h3>影射香港豪门真人真事 展示过亿珠宝、华丽服饰，三姐妹上演无休止的勾心斗角...
+					<h3><a href="">【C游戏下载】《迅雷问鼎》客户端，赢PSP3000，哄抢香港豪华游资格！</a></h3>大胆出位玩网游！今年夏天玩什么？玩真人“宝宝” 5P连环出战！
+					<h3><a href="">【D新片首播】《暴力街区13：终极》倍受期待法国动作大片最新续作.</a></h3>“跑酷”运动创始者大卫·贝尔与动作巨星塞瑞尔·拉菲利继续联手出演该片新作...
+					<h3><a href="">【E时尚男装】凡客诚品打造极限购物体验，全场免运费.</a></h3>经典免烫全棉短袖衬衫任选四件仅售199元，立即体验！...
+					<h3><a href="">【F快乐剧场】《龙之战争》龙与巨蟒混合而成的未知生物入侵地球</a></h3>火爆大片一网尽，精彩大奖任你寻，我们的快乐宣言，尽在康师傅剧场...
+				</div>
+			</dd>
+		</dl>
+	</div>
+	<script>
+		var pre = document.getElementById("pre");
+		var next = document.getElementById("next");
+		var picsel = document.getElementById("picsel");
+		var pictype = document.getElementById("pictype");
+		var txttype = document.getElementById("txttype");
+		var other = document.getElementById("other");
+		var ashover = picsel.getElementsByTagName("a");
+		var imgshover = picsel.getElementsByTagName("img");
+		var astype = pictype.getElementsByTagName("a");
+		var oastype = other.getElementsByTagName("a");
+		var h3type = txttype.getElementsByTagName("h3");
+		other.innerHTML = pictype.innerHTML;
+		var y = 42;
+		var t = 46;
+		var n = 186;
+		var q = 0;
+		var x = 4;
+		var sel_num = picsel.offsetHeight/y;
+		var z = sel_num - 4;
+		if(sel_num > 4){
+			next.className = "next";
+		}
+		var f=0;//初始化
+		var time=2000;//延迟时间
+		function show(){
+			f=f>ashover.length-1?0:f;//如果f>数组长度 则重新赋值为0，以便程序循环
+			for(i = 0; i < ashover.length; i++){
+				if(i==f){
+	 				ashover[i].className = "selbg";
+					pictype.style.marginTop = -n*f + "px";
+					other.style.marginTop = -n*f + "px";
+					txttype.style.marginTop = -t*f + "px";
+					coolshow();
+				}
+				else {ashover[i].className = "";}
+			}
+			f++;
+			if(f>3){
+				adda();
+			}else{
+				addc();
+			}
+		}
+		var ssoc = setInterval("show()",time);//自动播放-隔2秒执行一次，永远执行下去
+		function coolshow(){
+			var onum = 9;
+			var ssoa = setInterval(show_oa,30);
+			function show_oa(){
+				onum--;other.style.opacity = "0." + onum;
+				other.style.filter="alpha(opacity=" + onum + "0)";
+				if(onum == 0){
+					clearInterval(ssoa);
+				}
+			}	
+		}/* 切换效果 */
+		next.onclick = adda;
+		next.onmouseover = function() {
+			clearInterval(ssoc);
+		} 
+		next.onmouseout = function() {
+			ssoc = setInterval("show()",time);
+		} 
+		function adda(){
+			if(sel_num > 4){	
+				var w = 0;
+				var o = -y*q;
+				x++;
+				pre.className = "pre2";
+				if(q == 0 || q > 0){
+					q++;
+				}
+				var ssw = setInterval(show_w,10);
+			}
+			
+			function show_w(){
+				if(q < z || q == z){
+					w-=3;picsel.style.marginTop = (o + w) + "px";
+				}	
+				if(w < -y+1){
+					clearInterval(ssw);
+				}
+				if(q > z){
+					q = z;
+					clearInterval(ssw);
+				}
+			}
+			if(x-sel_num == 0){
+				next.className = "next2";
+			}
+			if(x-sel_num > 0){
+				x = sel_num;
+			}
+		}/* 浏览小图列表-下一页操作 */
+		pre.onclick = addb;
+		pre.onmouseover = function() {
+			clearInterval(ssoc);
+		}
+		pre.onmouseout = function() {
+			ssoc = setInterval("show()",time);
+		} 
+		function addb(){
+			if(x > 4){
+				var w = 0;
+				var o = -y*q;
+				x--;
+				next.className = "next"
+				q--;
+				var sswb = setInterval(show_wb,10);
+			}
+			
+				function show_wb(){
+					if(q < z || q == z){
+						w-=3;
+						picsel.style.marginTop = (o + -w) + "px";
+					}
+					if(w < -y+1){
+						clearInterval(sswb);
+					}				
+				}
+			if(x == 4){
+				pre.className = "pre";
+				next.className = "next";
+			}
+		}/* 浏览小图列表-上一页操作 */
+		function addc(){
+			if(x > 4){
+				var o = -y*q;
+				x--;
+				next.className = "next"
+				q--;		
+			}
+			picsel.style.marginTop = 0 + "px";
+			pre.className = "pre";next.className = "next";
+		}/* 自动播放-浏览至末尾返回 */
+		for(i = 0; i < oastype.length; i++){
+			oastype[i].onmouseover = function() {
+				clearInterval(ssoc);
+			}
+			oastype[i].onmouseout = function() {
+				ssoc = setInterval("show()",time);
+			} 
+		}
+		for(i = 0; i < h3type.length; i++){
+			h3type[i].onmouseover = function() {
+				clearInterval(ssoc);
+			}
+			h3type[i].onmouseout = function() {
+				ssoc = setInterval("show()",time);
+			} 
+		}
+		/* 鼠标(移入/移出)大图和文字时(停止/继续)自动播放 */
+		for(i = 0; i < imgshover.length; i++){
+			imgshover[i].num = i;
+			imgshover[i].onmouseover = typestyle;
+			imgshover[i].onmouseout = function() {
+				f = this.num+1;ssoc = setInterval("show()",time);
+			} 
+		}/* 鼠标(移入/移出)小图列表操作 */
+		function typestyle()
+		{
+			for(i = 0; i < ashover.length; i++)
+			{
+				ashover[i].className = "";
+			}
+			ashover[this.num].className = "selbg";
+			var s = this.num
+			var o = -n*s;
+			var v = -t*s;
+			pictype.style.marginTop = o + "px";
+			other.style.marginTop = o + "px";
+			txttype.style.marginTop = v + "px";
+			coolshow();
+			clearInterval(ssoc);
+		}
+	</script>
+</body>
+</html>
